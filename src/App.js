@@ -1,47 +1,51 @@
-import React, { Component, Fragment } from 'react';
-import Counter from './components/Counter/Counter';
-import Counter2 from './components/Counter/Counter2';
-import Band from './components/Band';
+import React, { Component} from 'react';
+import Users from './components/Users/Users';
 
 export default class App extends Component {
-  
-  constructor() {
+  constructor(){
     super();
+
     this.state = {
-      currentCounter: 3,
-      steps: 0
-    };
+      users:[],
+      showUsers: false  
+    }
   }
 
-  handleCount = (clickType) => {
-    const {currentCounter, steps} = this.state;
+  async componentDidMount(){
+    const res = await fetch('https://randomuser.me/api/?seed=rush&results=10&nat=BR&noinfo');
+    const json = await res.json();
     this.setState({
-        currentCounter: 
-        clickType === '+' ? currentCounter + 1 : currentCounter - 1,
-        steps: steps + 1,
+      users: json.results,
     });
   }
-  
+
+  componentDidUpdate(){
+
+  }
+
+  componentWillUnmount(){
+
+  }
+
+  handleShowUsers = (event) => {
+    this.setState({ showUsers: event.target.checked});
+  };
+
   render() {
-    const {currentCounter, steps} = this.state;
+    const {showUsers, users} = this.state;
+    console.log(users);
     return (
-      <Fragment>
-        <h3>Band</h3>
-        <Band />
-
-        <h3>Counter</h3>
-        <p>Cada componente tem um estado separado - incremento e decremento funciona isoladamente em cada elemento.</p>
-        <Counter />
-        <Counter />
-        <Counter />
-
-
-        <h3>Counter 2</h3>
-        <p>Cada elemento tem um estado compartilhado - incremento e decremento de cada um tem um valor para todos os elementos.</p>
-        <Counter2 onCount={this.handleCount} countValue={currentCounter} currentStep={steps}/>
-        <Counter2 onCount={this.handleCount} countValue={currentCounter} currentStep={steps}/>
-        <Counter2 onCount={this.handleCount} countValue={currentCounter} currentStep={steps}/>
-      </Fragment>
-    );
+      <div>
+        <div className="switch">
+            <label>
+              Mostrar usuários
+              <input type="checkbox" onChange={this.handleShowUsers}/>
+              <span className="lever"></span>
+            </label>
+        </div>
+        <hr/>
+        {showUsers && <Users users={users} /> }
+      </div>
+    )
   }
 }
