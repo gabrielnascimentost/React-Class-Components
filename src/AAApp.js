@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import Counter from './components/Counter/Counter';
-import Counter2 from './components/Counter/Counter2';
+import Counter from './components/counter/Counter';
+//import Counter2 from './components/counter/Counter2';
+import Counter2 from './components/counter/Counter2Functional';
 import Band from './components/Band';
 
 export default class App extends Component {

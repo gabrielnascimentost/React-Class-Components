@@ -5,7 +5,7 @@ import DecrementButton from './DecrementButton';
 import Value from './Value';
 import Steps from './Steps';
 
-export default class Counter extends Component {
+export default class Counter2 extends Component {
     
     handleButtonClick = (clickType) => {
         this.props.onCount(clickType);

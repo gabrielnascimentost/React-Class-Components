@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
-import Users from './components/users/Users';
-import Toggle from './components/toggle/Toggle';
+//import Users from './components/users/Users';
+import Users from './components/users/UsersFunctional';
+//import Toggle from './components/toggle/Toggle';
+import Toggle from './components/toggle/ToggleFunctional';
 
 export default class App extends Component {
   constructor(){
